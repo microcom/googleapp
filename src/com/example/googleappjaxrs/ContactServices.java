@@ -25,7 +25,7 @@ import com.google.appengine.api.datastore.Entity; */
 
 import com.example.contactclass.Contact;
 
-@Path("/time")
+@Path("/contact")
 public class ContactServices {
 
 	private Contact LocalContact = new Contact("Leo", "Ferre", "Moncton", "Qc" , "PQ" , "HoHoHo") ;
