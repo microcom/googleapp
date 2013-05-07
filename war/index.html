@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TEST</title>
+	<script type="text/javascript">
+        <!--
+        function sendGetRequest() { 
+        	 jQuery.ajax({
+                type:'GET',
+                url:$('#rest-url').val(),
+                dataType:'json',
+                context:document.body,
+                success:function (data, textStatus, jqXHR) {
+                    showRestResults(JSON.stringify(data, undefined, 2));
+                },
+                error:function (qXHR, textStatus, errorThrown) {
+                	if (errorThrown instanceof SyntaxError) {
+                        errorThrown = errorThrown.message;
+                    }
+                    showRestResults(errorThrown);
+                }
+            });
+           }
+
+        function sendPutRequest() {
+            $.ajax({
+                type:'PUT',
+                url:$('#rest-url').val(),
+                data: $('#set-value').val(),
+                dataType:'json',
+                context:document.body,
+                success:function (data, textStatus, jqXHR) {
+                    showRestResults(JSON.stringify(data, undefined, 2));
+                },
+                error:function (qXHR, textStatus, errorThrown) {
+                	if (errorThrown instanceof SyntaxError) {
+                        errorThrown = errorThrown.message;
+                    }
+                    showRestResults(errorThrown.message);
+                }
+            });
+        }
+
+        function showRestResults(bodyText) {
+            $('#rest-result-body').text(bodyText);
+            $('#rest-result-body').show();
+        }
+
+        // -->
+    </script>
+  </head>
+
+  <body>
+    <h2>Test Google App Engine + Jax-RS + Pojo</h2>
+	<div id="rest-client-widget" style="margin: 5px">
+		<form style="margin: 10px">
+			<button type="submit" onclick="sendGetRequest(); return false;">GET</button>
+			<button type="submit" formmethod="PUT" onclick="sendPutRequest(); return false;">PUT</button>
+		</form>	
+        <form style="margin: 5px">
+           <label for="rest-url">url : </label>
+           <input id="rest-url" type="text" value="/services/time">
+        </form>	
+        <form style="margin: 5px">  
+           <label class="control-label search-query" for="set-value">data : </label>
+           <input id="set-value" type="text" value="datum">
+        </form>
+		<div id="rest-result">
+          <pre id="rest-result-body">Theoretical output</pre>
+       </div>
+    </div>
+    <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+ </body>
+</html>
