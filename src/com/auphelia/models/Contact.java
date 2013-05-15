@@ -38,9 +38,7 @@ public class Contact {
 	}
 	
 	public Contact(String jsonInput, String email) throws JSONException{
-		
 		JSONObject contactJson = new JSONObject (jsonInput) ;
-		
 		prenom = contactJson.get("prenom").toString() ;
 		nom = contactJson.get("nom").toString() ;
 		rue = contactJson.get("rue").toString() ;
@@ -61,7 +59,7 @@ public class Contact {
 		this.codePostal = contact.getCodePostal();
 	}
 	
-	/*public Contact(String jsonInput) throws JSONException, JsonParseException, JsonMappingException, IOException{
+	/*public newContact(String jsonInput) throws JSONException, JsonParseException, JsonMappingException, IOException{
 		ObjectMapper mapper = new ObjectMapper();
 		Contact contact = mapper.readValue(jsonInput, Contact.class);
 		}*/

@@ -24,8 +24,15 @@ public class GoogleDAO implements ContactDAO {
 	}
 
 	public boolean addContact(Contact contact) {
-		ofy().save().entity(contact).now();
-		return true;
+		System.out.println(contact.getEmail()) ;
+		Contact fetchedContact = ofy().load().type(Contact.class).id(contact.getEmail()).now() ;
+		if (fetchedContact == null) {
+			ofy().save().entity(contact).now();
+			return true ;
+			}
+		else {
+			return false ;
+		}
 	}
 
 	public boolean deleteContact(String email) {
@@ -34,8 +41,12 @@ public class GoogleDAO implements ContactDAO {
 	}
 
 	public boolean changeContact(Contact contact) {
-		ofy().save().entity(contact).now();
-		return false;
+		Contact fetchedContact = ofy().load().type(Contact.class).id(contact.getEmail()).now() ;
+		if (fetchedContact == null) {
+			return false ;
+		} else {
+			ofy().save().entity(contact).now();
+			return true ;
+		}
 	}
-
 }
