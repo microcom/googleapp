@@ -6,7 +6,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/google library"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google Library"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
