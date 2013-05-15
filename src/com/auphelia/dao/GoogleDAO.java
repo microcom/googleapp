@@ -1,50 +1,40 @@
 package com.auphelia.dao;
 
+import com.auphelia.models.Contact;
+import com.googlecode.objectify.cmd.Query;
+
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.jdo.PersistenceManager;
-
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
-
-import com.auphelia.models.Contact;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 public class GoogleDAO implements ContactDAO {
-
-	private DatastoreService datastore ;
-	
-	public GoogleDAO (){
-		 datastore = DatastoreServiceFactory.getDatastoreService();
-	}
-	
-	
 	public Set<Contact> getAllContact() {
-		
-
-		return null;
+		Set<Contact> returnedContacts = new HashSet<Contact>();
+		Query<Contact> fetchedContacts = ofy().load().type(Contact.class);
+		for (Contact insertedContact : fetchedContacts ){
+			returnedContacts.add(insertedContact) ;
+		}
+		return returnedContacts;
 	}
 
 	public Contact getContact(String email) {
-
-
-		return null;
+		Contact fetchedContact = ofy().load().type(Contact.class).id(email).now() ;
+		return fetchedContact;
 	}
 
 	public boolean addContact(Contact contact) {
-		Entity newContact = new Entity("Contact");
-		
-		return false;
+		ofy().save().entity(contact).now();
+		return true;
 	}
 
 	public boolean deleteContact(String email) {
+		ofy().delete().type(Contact.class).id(email).now() ;
+		return true;
+	}
 
-
+	public boolean changeContact(Contact contact) {
+		ofy().save().entity(contact).now();
 		return false;
 	}
 

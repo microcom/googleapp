@@ -11,5 +11,7 @@ public interface ContactDAO {
 	
 	public boolean addContact(Contact contact);
 	
+	public boolean changeContact(Contact contact);
+	
 	public boolean deleteContact(String email);
 }

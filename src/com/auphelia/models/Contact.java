@@ -2,16 +2,23 @@ package com.auphelia.models;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import java.io.IOException;
 
 @XmlRootElement
+@Entity(name="contact")
 public class Contact {
 
+	private String _id;
 	private String prenom ;
 	private String nom ;
-	private String email;
+	@Id private String email;
 	private String rue;
 	private String ville ;
 	private String province ;
@@ -19,8 +26,7 @@ public class Contact {
 	
 	public Contact(){}
 	
-	public Contact(String prenom, String nom, String email, String rue,
-			String ville, String province, String codePostal) {
+	public Contact(String prenom, String nom, String email, String rue, String ville, String province, String codePostal) {
 		super();
 		this.prenom = prenom;
 		this.nom = nom;
@@ -30,7 +36,6 @@ public class Contact {
 		this.province = province;
 		this.codePostal = codePostal;
 	}
-	
 	
 	public Contact(String jsonInput, String email) throws JSONException{
 		
@@ -46,6 +51,7 @@ public class Contact {
 	}
 	
 	public Contact(Contact contact){
+		this._id = contact.get_id();
 		this.nom = contact.getNom();
 		this.prenom = contact.getPrenom();
 		this.email = contact.getEmail();
@@ -55,11 +61,18 @@ public class Contact {
 		this.codePostal = contact.getCodePostal();
 	}
 	
-	/*public static Contact newContact(String jsonInput) throws JSONException, JsonParseException, JsonMappingException, IOException{
-			ObjectMapper mapper = new ObjectMapper();
-			Contact contact = mapper.readValue(jsonInput, Contact.class);
-			return contact ;
+	/*public Contact(String jsonInput) throws JSONException, JsonParseException, JsonMappingException, IOException{
+		ObjectMapper mapper = new ObjectMapper();
+		Contact contact = mapper.readValue(jsonInput, Contact.class);
 		}*/
+	
+	public String get_id() {
+		return _id;
+	}
+
+	public void set_id(String prenom) {
+		this._id = prenom;
+	}
 	
 	public String getPrenom() {
 		return prenom;

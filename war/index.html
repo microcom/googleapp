@@ -30,11 +30,11 @@
             });
            }
 
-        function sendPutRequest() {
+        function sendPostRequest() {
             $.ajax({
-                type:'PUT',
-                url:$('#rest-url').val(),
-                data: $('#set-value').val(),
+                type:'POST',
+                url:$('#rest-url').val() + '/' + $('#set-value').val(),
+                data:'{ "email":AAAAAAA@AAAA, "prenom":avss, "nom":a, "rue":a, "ville":a, "province":a, "codePostal":a }' ,
                 dataType:'json',
                 context:document.body,
                 success:function (data, textStatus, jqXHR) {
@@ -59,11 +59,11 @@
   </head>
 
   <body>
-    <h2>Test Google App Engine + Jax-RS + Pojo</h2>
+    <h2>Test Google App Engine Datastore</h2>
 	<div id="rest-client-widget" style="margin: 5px">
 		<form style="margin: 10px">
 			<button type="submit" onclick="sendGetRequest(); return false;">GET</button>
-			<button type="submit" formmethod="PUT" onclick="sendPutRequest(); return false;">PUT</button>
+			<button type="submit" formmethod="POST" onclick="sendPostRequest(); return false;">POST</button>
 		</form>	
         <form style="margin: 5px">
            <label for="rest-url">url : </label>
